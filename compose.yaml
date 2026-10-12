@@ -1,7 +1,6 @@
 services:
 
   keepalived:
-    build: ./docker
     image: ghcr.io/stefgo/keepalived:latest
     container_name: keepalived
     restart: unless-stopped
