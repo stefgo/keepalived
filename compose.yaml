@@ -1,0 +1,19 @@
+services:
+
+  keepalived:
+    build: ./docker
+    image: ghcr.io/stefgo/keepalived:latest
+    container_name: keepalived
+    restart: unless-stopped
+    # VRRP advertisements and the virtual IPs live on the host interfaces
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+    # All VRRP_* variables are passed through, so further instances and
+    # scripts only need to be added to .env
+    env_file: .env
+    # Scripts referenced by VRRP_SCRIPT_<n>_SCRIPT or VRRP_<n>_NOTIFY*
+    # volumes:
+    #   - ./scripts:/etc/keepalived/scripts:ro
